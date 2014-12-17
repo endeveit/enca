@@ -9,6 +9,6 @@ go:
 
 before_install:
   - sudo apt-get update -qq
-  - sudo apt-get -y -o install libenca0 libenca-dev
+  - sudo apt-get -y install libenca0 libenca-dev
 
 script: go test -v ./

@@ -1,8 +1,8 @@
 # go-enca
 
-Minimal cgo bindings for libenca.
+This is a minimal cgo bindings for [libenca](http://cihar.com/software/enca/).
 
-If you need to detect language of string you can use [guesslanguage](https://github.com/endeveit/guesslanguage).
+If you need to detect the language of a string you can use [guesslanguage](https://github.com/endeveit/guesslanguage) package.
 
 ## Supported Go versions
 
@@ -30,7 +30,7 @@ func main() {
 	analyzer, err := enca.New("zh")
 
 	if err == nil {
-		encoding, err := analyzer.FromString("美国各州选民今天开始正式投票。据信，", NAME_STYLE_HUMAN)
+		encoding, err := analyzer.FromString("美国各州选民今天开始正式投票。据信，", enca.NAME_STYLE_HUMAN)
 		defer analyzer.Free()
 
 		// Output:
@@ -41,3 +41,7 @@ func main() {
 	}
 }
 ```
+
+## Documentation
+
+godoc is available [here](http://godoc.org/github.com/endeveit/enca).
