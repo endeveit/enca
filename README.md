@@ -6,7 +6,7 @@ If you need to detect the language of a string you can use [guesslanguage](https
 
 ## Supported Go versions
 
-go-enca is tested against Go 1.0, 1.1, 1.2, 1.3 and tip.
+enca is tested against Go 1.0, 1.1, 1.2, 1.3 and tip.
 
 ## Usage
 
