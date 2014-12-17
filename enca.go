@@ -46,6 +46,7 @@ func init() {
 
 type EncaAnalyser struct {
 	Language string
+	// Language for which the analyser is initialized
 	enca C.EncaAnalyser
 }
 

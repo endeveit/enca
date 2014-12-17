@@ -43,7 +43,7 @@ func Test_EncaFromBytes(t *testing.T) {
 	}
 
 	var (
-		ea      *encaAnalyser
+		ea      *EncaAnalyser
 		parts   []string
 		lang    string
 		tests   map[string][]string = make(map[string][]string)
