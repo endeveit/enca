@@ -1,4 +1,4 @@
-# go-enca
+# go-enca [![Build Status](https://travis-ci.org/endeveit/enca.svg?branch=master)](https://travis-ci.org/endeveit/enca)
 
 This is a minimal cgo bindings for [libenca](http://cihar.com/software/enca/).
 

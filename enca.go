@@ -44,8 +44,8 @@ func init() {
 	C.free(unsafe.Pointer(l))
 }
 
-type encaAnalyser struct {
-	lang string
+type EncaAnalyser struct {
+	Language string
 	enca C.EncaAnalyser
 }
 
@@ -55,7 +55,7 @@ func GetAvailableLanguages() []string {
 }
 
 // Returns a new EncaAnalyzer object for the given language.
-func New(lang string) (*encaAnalyser, error) {
+func New(lang string) (*EncaAnalyser, error) {
 	if !keyExists(lang, availableLanguages) {
 		return nil, fmt.Errorf(
 			"Invalid language '%s'. Available languages are: '%s'",
@@ -68,7 +68,7 @@ func New(lang string) (*encaAnalyser, error) {
 
 	defer C.free(unsafe.Pointer(cLang))
 
-	analyzer := &encaAnalyser{lang: lang, enca: C.enca_analyser_alloc(cLang)}
+	analyzer := &EncaAnalyser{Language: lang, enca: C.enca_analyser_alloc(cLang)}
 	C.enca_set_threshold(analyzer.enca, C.double(1.38))
 	C.enca_set_multibyte(analyzer.enca, cOne)
 	C.enca_set_ambiguity(analyzer.enca, cOne)
@@ -78,7 +78,7 @@ func New(lang string) (*encaAnalyser, error) {
 }
 
 // Returns encoding of provided byte array
-func (ea *encaAnalyser) FromBytes(bytes []byte, nameStyle int) (result string, err error) {
+func (ea *EncaAnalyser) FromBytes(bytes []byte, nameStyle int) (result string, err error) {
 	cText := (*C.uchar)(unsafe.Pointer(&bytes[0]))
 
 	encoding := C.enca_analyse_const(ea.enca, cText, C.size_t(len(bytes)))
@@ -94,12 +94,12 @@ func (ea *encaAnalyser) FromBytes(bytes []byte, nameStyle int) (result string, e
 }
 
 // Helper function that returns encoding of provided string
-func (ea *encaAnalyser) FromString(text string, nameStyle int) (string, error) {
+func (ea *EncaAnalyser) FromString(text string, nameStyle int) (string, error) {
 	return ea.FromBytes([]byte(text), nameStyle)
 }
 
 // Frees memory used by EncaAnalyser
-func (ea *encaAnalyser) Free() {
+func (ea *EncaAnalyser) Free() {
 	C.enca_analyser_free(ea.enca)
 }
 
