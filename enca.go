@@ -1,4 +1,4 @@
-// Package go-enca provides a minimal cgo bindings for libenca
+// Package enca provides a minimal cgo bindings for libenca
 //
 // Source code and project home:
 // https://github.com/endeveit/go-enca

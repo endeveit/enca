@@ -1,4 +1,4 @@
-# go-enca [![Build Status](https://travis-ci.org/endeveit/enca.svg?branch=master)](https://travis-ci.org/endeveit/enca)
+# enca [![Build Status](https://travis-ci.org/endeveit/enca.svg?branch=master)](https://travis-ci.org/endeveit/enca)
 
 This is a minimal cgo bindings for [libenca](http://cihar.com/software/enca/).
 
@@ -15,7 +15,7 @@ Install libenca to your system:
 $ sudo apt-get install libenca0 libenca-dev
 ```
 
-Install in your `${GOPATH}` using `go get -u github.com/endeveit/go-enca`
+Install in your `${GOPATH}` using `go get -u github.com/endeveit/enca`
 
 Then call it:
 ```go
