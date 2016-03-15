@@ -15,22 +15,23 @@ import "C"
 import (
 	"fmt"
 	"strings"
+	"sync"
 	"unsafe"
 )
 
 const (
-	NAME_STYLE_ENCA = 0 << iota
 	// Default, implicit charset name in Enca
-	NAME_STYLE_RFC1345
+	NAME_STYLE_ENCA = 0 << iota
 	// RFC 1345 or otherwise canonical charset name
-	NAME_STYLE_CSTOCS
+	NAME_STYLE_RFC1345
 	// Cstocs charset name (may not exist)
-	NAME_STYLE_ICONV
+	NAME_STYLE_CSTOCS
 	// Iconv charset name (may not exist)
-	NAME_STYLE_HUMAN
+	NAME_STYLE_ICONV
 	// Human comprehensible description
-	NAME_STYLE_MIME
+	NAME_STYLE_HUMAN
 	// Preferred MIME name (may not exist)
+	NAME_STYLE_MIME
 )
 
 var availableLanguages []string
@@ -45,9 +46,10 @@ func init() {
 }
 
 type EncaAnalyser struct {
+	sync.Mutex
 	// Language for which the analyser is initialized
 	Language string
-	enca C.EncaAnalyser
+	enca     C.EncaAnalyser
 }
 
 // Returns list of available languages
@@ -80,6 +82,8 @@ func New(lang string) (*EncaAnalyser, error) {
 
 // Returns encoding of provided byte array
 func (ea *EncaAnalyser) FromBytes(bytes []byte, nameStyle int) (result string, err error) {
+	ea.Lock()
+	defer ea.Unlock()
 	cText := (*C.uchar)(unsafe.Pointer(&bytes[0]))
 
 	encoding := C.enca_analyse_const(ea.enca, cText, C.size_t(len(bytes)))
